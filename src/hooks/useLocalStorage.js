@@ -14,4 +14,3 @@ export const useLocalStorage = reactive({
     localStorage.setItem("noteContent", JSON.stringify(this.notes));
   },
 });
-

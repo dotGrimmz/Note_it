@@ -1,0 +1,17 @@
+
+
+// button {
+//     border-radius: 5px;
+//     color: teal;
+//     height: fit-content;
+//     font-weight: 10;
+//     cursor: pointer;
+//   }
+
+  @mixin styledButton {
+    border-radius: 5px;
+    color: teal;
+    height: fit-content;
+    font-weight: 10;
+    cursor: pointer;
+  }

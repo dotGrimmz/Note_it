@@ -1,15 +1,16 @@
-<!-- eslint-disable prettier/prettier -->
-
 <template>
-   
-    <div class="note-wrapper" >
-    <p class="details">Note: {{details}} </p>
-    <textarea v-if="showEdit"  v-model="editDetails"></textarea>
-    </div>
-    <div class="btn-container">
-    <button :disabled="editDetails == ''" @click="Edit">Edit</button>
-    <button @click="Delete" >Delete</button>
-   
+  <div class="note-wrapper">
+    <p class="details">Note: {{ details }}</p>
+    <textarea v-if="showEdit" v-model="editDetails"></textarea>
+  </div>
+  <div class="btn-container">
+    <button :disabled="!editDetails" @click="Edit">
+      <div>
+        <p v-if="!showEdit">Edit</p>
+        <p v-else>Save</p>
+      </div>
+    </button>
+    <button @click="Delete">Delete</button>
   </div>
 </template>
 
@@ -32,10 +33,24 @@ export default {
         });
       }
     },
-
     Delete() {
       this.$emit("DeleteEmit", this.index);
     },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import "../../assets/abstracts/colors";
+
+.note-wrapper {
+  display: flex;
+}
+
+button {
+  margin: 2px;
+}
+.details {
+  color: $textColor;
+}
+</style>

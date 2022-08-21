@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div class="create-note-wrapper">
     <textarea class="note-input" v-model="details" />
-    <button :disabled="details == ''" @click="CreateNote">create note</button>
+    <button class="note-btn" :disabled="!details" @click="CreateNote">
+      Create Note
+    </button>
   </div>
 </template>
 
@@ -21,11 +23,35 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "@/assets/globals";
+@import "../../assets/abstracts/colors";
 .note-input {
   height: 100px;
   width: 400px;
   border-radius: 5px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.19);
+  box-shadow: $shadowLight;
+}
+
+.note-btn {
+  border-radius: 5px;
+  color: teal;
+  height: 30px;
+  font-size: 20px;
+  font-weight: 10;
+  margin-top: 10px;
+}
+.note-btn:hover {
+  cursor: pointer;
+}
+.create-note-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.note-input {
+  height: 100px;
+  width: 400px;
+  border-radius: 5px;
+  box-shadow: $shadowLight;
 }
 </style>
