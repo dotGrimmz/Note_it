@@ -42,6 +42,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../assets/abstracts/colors";
+@import "@/assets/globals";
 
 .note-wrapper {
   display: flex;

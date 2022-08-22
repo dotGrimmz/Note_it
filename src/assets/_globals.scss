@@ -1,17 +1,16 @@
 
 
-// button {
-//     border-radius: 5px;
-//     color: teal;
-//     height: fit-content;
-//     font-weight: 10;
-//     cursor: pointer;
-//   }
 
-  @mixin styledButton {
+
+  @mixin styled-button {
     border-radius: 5px;
     color: teal;
     height: fit-content;
     font-weight: 10;
     cursor: pointer;
+  }
+
+  @mixin flex-container($direction: row) {
+    display: flex;
+    flex-direction: $direction
   }

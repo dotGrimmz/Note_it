@@ -24,29 +24,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/globals";
+@import "../../assets/globals";
 @import "../../assets/abstracts/colors";
-.note-input {
-  height: 100px;
-  width: 400px;
-  border-radius: 5px;
-  box-shadow: $shadowLight;
-}
 
 .note-btn {
-  border-radius: 5px;
-  color: teal;
+  @include styled-button;
   height: 30px;
   font-size: 20px;
   font-weight: 10;
   margin-top: 10px;
 }
-.note-btn:hover {
-  cursor: pointer;
-}
+
 .create-note-wrapper {
-  display: flex;
-  flex-direction: column;
+  @include flex-container(column);
 }
 .note-input {
   height: 100px;

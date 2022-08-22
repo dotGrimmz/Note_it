@@ -24,7 +24,7 @@
       </div>
       <div>
         <h2>Create a Note</h2>
-        <Create @CreateEmit="createNote" />
+        <Create @CreateEmit="createNote" :success="success" />
       </div>
     </div>
   </main>
@@ -34,12 +34,30 @@
 import Create from "../components/create/CreateNote.vue";
 import NoteCard from "../components/note/NoteCard.vue";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import { createToast } from "mosha-vue-toastify";
+import "mosha-vue-toastify/dist/style.css";
+
 export default {
   setup() {
     useLocalStorage.loadNotes();
     const savedNotes = useLocalStorage.notes;
+    const noteCreatedToast = () => {
+      createToast("Note Created!", {
+        type: "success",
+        position: "bottom-left",
+      });
+    };
+    const noteDeletedToast = () => {
+      createToast("Note Deleted!", { type: "info", position: "bottom-left" });
+    };
+    const editedNoteSaved = () =>
+      createToast("Note Saved", { type: "default", position: "bottom-left" });
+
     return {
       notes: savedNotes,
+      noteCreatedToast,
+      noteDeletedToast,
+      editedNoteSaved,
     };
   },
   components: {
@@ -53,22 +71,26 @@ export default {
         details: details,
       });
       useLocalStorage.saveNotes();
+      this.noteCreatedToast();
     },
     editNote({ details, index }) {
       this.notes[index].details = details;
       useLocalStorage.saveNotes();
+      this.editedNoteSaved();
     },
 
     deleteNote(index) {
       this.notes.splice(index, 1);
       useLocalStorage.saveNotes();
+      this.noteDeletedToast();
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/_globals.scss";
+@import "../assets/abstracts/colors";
+@import "../assets/globals";
 
 .header-container {
   text-align: center;
@@ -77,30 +99,28 @@ export default {
 }
 
 .wrapper {
-  display: flex;
+  @include flex-container;
   justify-content: space-around;
 }
 .panel-container {
+  @include flex-container(column);
   border: 1.5px solid green;
   width: 300px;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   grid-gap: 5px;
   background: white;
   border-radius: 5px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.19);
+  box-shadow: $shadowLight;
   padding-bottom: 15px;
   padding-top: 15px;
 }
 .panel-item {
   border: 1.5px solid black;
   width: 250px;
-  display: block;
   margin-top: 5px;
   margin-bottom: 5px;
   border-radius: 5px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.19);
+  box-shadow: $shadowLight;
   height: fit-content;
   padding: 2px;
   transition: transform 0.2s;
