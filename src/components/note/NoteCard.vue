@@ -1,16 +1,20 @@
 <template>
   <div class="note-wrapper">
-    <p class="details">Note: {{ details }}</p>
-    <textarea v-if="showEdit" v-model="editDetails"></textarea>
+    <p :id="'note-details-' + index" class="details">Note: {{ details }}</p>
+    <textarea
+      :id="'edit-input' + index"
+      v-if="showEdit"
+      v-model="editDetails"
+    ></textarea>
   </div>
   <div class="btn-container">
-    <button :disabled="!editDetails" @click="Edit">
+    <button id="edit-btn" :disabled="!editDetails" @click="Edit">
       <div>
         <p v-if="!showEdit">Edit</p>
-        <p v-else>Save</p>
+        <p id="save-btn" v-else>Save</p>
       </div>
     </button>
-    <button @click="Delete">Delete</button>
+    <button :id="'delete-btn' + index"   @click="Delete">Delete</button>
   </div>
 </template>
 

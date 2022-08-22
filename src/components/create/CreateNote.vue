@@ -1,7 +1,12 @@
 <template>
   <div class="create-note-wrapper">
     <textarea class="note-input" v-model="details" />
-    <button class="note-btn" :disabled="!details" @click="CreateNote">
+    <button
+      id="create-btn"
+      class="note-btn"
+      :disabled="!details"
+      @click="CreateNote"
+    >
       Create Note
     </button>
   </div>
